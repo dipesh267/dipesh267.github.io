@@ -24,11 +24,6 @@ d3.json(queryUrl, function(data) {
   var myMap = L.map("map", {
     center: [37.7749, -122.4194],
     zoom: 4
-    // layers: [
-    //   plate_markers,
-    //   spot
-    // ]
-
   });
 
   // console.log(data.features);
@@ -37,14 +32,8 @@ d3.json(queryUrl, function(data) {
     maxZoom: 10,
     id: "mapbox.streets",
     accessToken: API_KEY
-    });//.addTo(myMap);
-  
-  var darkmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 10,
-    id: "mapbox.dark",
-    accessToken: API_KEY
     }).addTo(myMap);
+  
 
   var featureList = data.features;
 
@@ -69,20 +58,6 @@ d3.json(queryUrl, function(data) {
        .addTo(myMap);
   });
 
-
-    d3.json("static/data/PB2002_plates.json",function(pData){
-      plate_markers = (L.geoJSON(pData).addTo(myMap));
-    });
-
-    var overlays = {
-      "Quakes": spot,
-      "Tectonic Plates": plate_markers
-    };
-  
-  lightmap.addTo(myMap);
-  //spot.addTo(myMap);
-  //plate_markers.addTo(myMap);
-  // L.control.layers(null, overlays).addTo(myMap);
 
   var legend = L.control({ position: "bottomright" });
   legend.onAdd = function() {
